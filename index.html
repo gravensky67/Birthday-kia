@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Kiya! 🤍🌸</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink-soft: #fce4ec;
+            --pink-medium: #f8bbd0;
+            --pink-dark: #d81b60;
+            --red-letter: #e53935;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.8);
+            --gray-light: #f5f5f5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, var(--pink-soft) 0%, #ffffff 100%);
+            color: #444;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* WELCOME SCREEN */
+        #welcomeScreen {
+            position: fixed; inset: 0; background: var(--pink-soft);
+            z-index: 9999; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; transition: 0.8s ease-in-out;
+        }
+
+        /* HEADER */
+        header {
+            padding: 20px 50px; display: flex; justify-content: space-between;
+            align-items: center; position: fixed; width: 100%; top: 0;
+            z-index: 100; background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px);
+        }
+
+        header h1 { font-family: 'Pacifico', cursive; color: var(--pink-dark); font-size: 1.6rem; }
+
+        /* HERO SECTION */
+        .hero { margin-top: 150px; text-align: center; padding: 0 20px; }
+        .hi-kiya { font-size: 1.2rem; color: #888; letter-spacing: 2px; display: block; }
+        .happy-birthday {
+            font-family: Arial, sans-serif; font-size: 4.5rem; font-weight: 900;
+            color: #000; line-height: 1; margin-bottom: 30px; text-transform: uppercase;
+        }
+
+        /* CONTAINER */
+        .container { max-width: 900px; margin: 0 auto 60px; padding: 20px; flex: 1; }
+
+        /* EDELWEISS SECTION */
+        .edelweiss-card {
+            background: var(--white); padding: 40px; border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 40px;
+            border: 1px solid var(--pink-medium); text-align: center;
+        }
+
+        .edelweiss-img-container { width: 250px; margin: 0 auto 20px; }
+        .edelweiss-img-container img { width: 100%; height: auto; border-radius: 15px; }
+
+        .philosophy-text { font-size: 1rem; line-height: 1.8; color: #555; text-align: justify; }
+        .philosophy-text b { color: var(--pink-dark); }
+
+        /* GRID & BUTTONS */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        
+        .card-box { 
+            padding: 30px; border-radius: 25px; text-align: center; 
+            position: relative; overflow: hidden; border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .card-letter { background: var(--red-letter); color: white; }
+        .card-letter h2 { color: white; margin-bottom: 15px; }
+        
+        .card-gift { background: var(--pink-medium); color: white; }
+        .card-gift h2 { color: white; margin-bottom: 15px; }
+
+        .card-hopes { background: var(--gray-light); color: #444; }
+        .card-hopes h2 { margin-bottom: 15px; }
+
+        .corner-emoji {
+            position: absolute; top: 10px; right: 15px; font-size: 1.5rem; opacity: 0.8;
+        }
+
+        .btn { background: var(--pink-dark); color: white; border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        .btn-white { background: white; color: var(--red-letter); }
+        .btn-gift { background: white; color: var(--pink-dark); }
+        .btn:hover { transform: scale(1.05); }
+
+        /* FOOTER */
+        footer { background: #000; color: #fff; padding: 25px; text-align: center; margin-top: auto; }
+
+        /* OVERLAYS */
+        .overlay { position: fixed; inset: 0; background: rgba(255,255,255,0.96); display: none; z-index: 200; justify-content: center; align-items: center; padding: 20px; }
+        
+        .modal { 
+            background: white; padding: 40px; border-radius: 30px; 
+            max-width: 650px; width: 95%; max-height: 85vh; 
+            overflow-y: auto; text-align: left; box-shadow: 0 10px 40px rgba(0,0,0,0.1); 
+        }
+
+        /* GIFT MODAL SCROLLABLE */
+        #final-surprise {
+            background: white; padding: 30px; border-radius: 30px; border: 2px solid var(--pink-soft);
+            max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto;
+            display: none; flex-direction: column; align-items: center; gap: 15px;
+        }
+
+        #final-surprise img { width: 100%; max-width: 380px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+
+        /* BALLOONS */
+        .balloon {
+            width: 80px; height: 100px; background: var(--pink-medium);
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            display: flex; justify-content: center; align-items: center;
+            color: white; font-weight: bold; cursor: pointer; position: absolute;
+            box-shadow: inset -10px -10px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="welcomeScreen">
+        <h2 style="font-family: 'Pacifico'; color: var(--pink-dark); margin-bottom: 20px;">Halo Kiya! ✨</h2>
+        <button class="btn" onclick="startEverything()">KLIK DI SINI</button>
+    </div>
+
+    <audio id="bgMusic" loop><source src="music.mp3" type="audio/mpeg"></audio>
+
+    <header>
+        <h1>Happy Birthday Kiya! 💗</h1>
+        <div style="font-size: 0.9rem; font-weight: 600; color: var(--pink-dark);">MADE BY IYAN</div>
+    </header>
+
+    <div class="hero">
+        <span class="hi-kiya">hi kiya,</span>
+        <h2 class="happy-birthday">HAPPY BIRTHDAY!</h2>
+    </div>
+
+    <div class="container">
+        <div class="edelweiss-card">
+            <div class="edelweiss-img-container">
+                <img src="edelweiss.jpg" alt="Bunga Edelweiss">
+            </div>
+            <h3 style="font-family: 'Pacifico'; color: var(--pink-dark); margin-bottom: 15px; font-size: 1.8rem;">Filosofi Edelweiss</h3>
+            <div class="philosophy-text">
+                <p>
+                    Sama seperti bunga <b>Edelweiss</b>, ia dijuluki sebagai <b>"Bunga Abadi"</b>. Filosofinya bagi Iyan adalah tentang <b>Ketulusan dan Pengabdian</b>. Harapannya, seperti Edelweiss, kebahagiaan dan iman Kiya akan selalu <b>tangguh, murni, dan abadi</b> melewati musim apa pun dalam hidup.
+                </p>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="card-box card-letter">
+                <span class="corner-emoji">✉️</span>
+                <h2>LETTER</h2>
+                <button class="btn btn-white" onclick="openModal('letterOverlay')">READ IT</button>
+            </div>
+            <div class="card-box card-gift">
+                <span class="corner-emoji">🎁</span>
+                <h2>GIFT</h2>
+                <button class="btn btn-gift" onclick="startGift()">CLICK TO OPEN</button>
+            </div>
+            <div class="card-box card-hopes">
+                <span class="corner-emoji">⭐</span>
+                <h2>HOPES</h2>
+                <button class="btn" onclick="openModal('hopeOverlay')">FILL IN HERE</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>I'll always be with you <3</footer>
+
+    <div id="letterOverlay" class="overlay">
+        <div class="modal">
+            <h2 style="font-family: 'Pacifico'; color: var(--pink-dark); text-align: center; margin-bottom: 20px;">Happy Birthday, Kiya 🤍🌸</h2>
+            <div style="white-space: pre-line; line-height: 1.8; color: #444; font-weight: 600; text-align: justify;">
+                Kiya, you are like a soft white morning and a calming pink sunset — beautiful, warm, and full of peace. From the very first time I saw you, there was a happiness I couldn’t explain. It felt like my heart knew that you were someone special and precious.
+
+                I am so proud of you — of your kindness, your strength, and your sincere smile. You are not only beautiful on the outside, but also on the inside. As it is written in Song of Songs 4:7, “You are altogether beautiful, my darling; there is no flaw in you.” That verse reminds me of you — beautiful as you are, precious, and loved.
+
+                On this day that God has given, I pray to Lord Jesus that every step you take will always be under His protection. As written in Psalm 91:15–16, “He will call on Me, and I will answer him; I will be with him in trouble, I will deliver him and honor him. With long life I will satisfy him and show him My salvation.”
+
+                May when you pray, God answers you. When you are tired, may God strengthen you. When you are afraid, may God protect you. And may He bless you with a long life, peace, and a future full of hope.
+
+                Thank you for being the soft white and pink color in my life — full of warmth and joy. Stay kind, stay gentle, and keep shining.
+
+                I am truly grateful that God brought us together.
+
+                Happy Birthday, Kiya. 🤍🌸
+
+                May Lord Jesus always walk with you.
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn" onclick="closeOverlay('letterOverlay')">Close Letter</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="giftOverlay" class="overlay">
+        <div id="balloon-area" style="width: 100%; height: 100%; position: relative;"></div>
+        <div id="final-surprise">
+            <h1 style="font-family: 'Pacifico'; color: var(--pink-dark); font-size: 2.8rem;">HAPPY SWEET 16! 🎂🌸</h1>
+            <img src="gift.jpg" alt="Birthday Gift">
+            <p style="font-weight: 600; color: #555;">May all your wishes come true, Kiya!</p>
+            <button class="btn" onclick="closeOverlay('giftOverlay')">Close Gift</button>
+        </div>
+    </div>
+
+    <div id="hopeOverlay" class="overlay">
+        <div class="modal" style="text-align: center;">
+            <h2 style="font-family: 'Pacifico'; color: var(--pink-dark); margin-bottom: 20px;">Hopes for this Year ✨</h2>
+            <textarea id="hopeInput" style="width:100%; height:100px; padding:15px; border-radius:15px; border:1px solid var(--pink-medium);" placeholder="Tulis harapanmu di sini..."></textarea>
+            <button class="btn" style="margin-top: 15px;" onclick="saveHope()">Save My Hope</button>
+            <div id="displayHopes" style="margin-top: 20px; text-align: left;"></div>
+            <button class="btn" style="background:#888; margin-top: 20px;" onclick="closeOverlay('hopeOverlay')">Close</button>
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('bgMusic');
+        function startEverything() { audio.play(); document.getElementById('welcomeScreen').style.display = 'none'; }
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; if(id==='hopeOverlay') loadHopes(); }
+        function closeOverlay(id) { document.getElementById(id).style.display = 'none'; }
+        function startGift() {
+            document.getElementById('giftOverlay').style.display = 'flex';
+            document.getElementById('balloon-area').innerHTML = '';
+            document.getElementById('final-surprise').style.display = 'none';
+            createBalloon(1);
+        }
+        function createBalloon(num) {
+            const area = document.getElementById('balloon-area');
+            const b = document.createElement('div');
+            b.className = 'balloon'; b.innerText = num;
+            b.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+            b.style.top = Math.random() * (window.innerHeight - 150) + 'px';
+            b.onclick = function() {
+                this.remove();
+                if(num < 16) createBalloon(num + 1);
+                else { 
+                    document.getElementById('balloon-area').style.display = 'none';
+                    document.getElementById('final-surprise').style.display = 'flex';
+                }
+            };
+            area.appendChild(b);
+        }
+        function saveHope() {
+            const input = document.getElementById('hopeInput');
+            if(input.value.trim() !== "") {
+                let h = JSON.parse(localStorage.getItem('kiyaHopes')) || [];
+                h.push(input.value);
+                localStorage.setItem('kiyaHopes', JSON.stringify(h));
+                input.value = ""; loadHopes();
+            }
+        }
+        function loadHopes() {
+            const d = document.getElementById('displayHopes');
+            let h = JSON.parse(localStorage.getItem('kiyaHopes')) || [];
+            d.innerHTML = h.map(item => `<p style="border-bottom:1px dotted #ccc; padding:8px;">" ${item} "</p>`).join('');
+        }
+    </script>
+</body>
+</html>
